@@ -4,7 +4,7 @@ import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css';
 
-const MyNavbar = () => {
+function MyNavbar({ user, setUser }) {
     const [showSubMenu, setShowSubMenu] = useState(false);
     const timeoutRef = useRef(null);
 
@@ -41,20 +41,33 @@ const MyNavbar = () => {
         };
     }, []);
 
+    const handleLogout = () => {
+        setUser(null); // Clear the user state on logout
+    };
+
     return (
         <Navbar fixed="top" className="navbar-transparent" expand="lg">
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="left">
+                <Nav className="mr-auto">
                     <Nav.Link as={Link} to="/" className="page-scroll">Home</Nav.Link>
                     <Nav.Link as={Link} to="/conference" className="page-scroll">Conference</Nav.Link>
                     <Nav.Link as={Link} to="/pricing" className="page-scroll">Pricing</Nav.Link>
                     <Nav.Link as={Link} to="/about" className="page-scroll">About us</Nav.Link>
                     <Nav.Link as={Link} to="/kontakt" className="page-scroll">Kontakt</Nav.Link>
                 </Nav>
-                <Nav className="right">
-                    <Nav.Link as={Link} to="/signin" className="page-scroll">Sign In</Nav.Link>
-                    <Nav.Link as={Link} to="/register" className="page-scroll">Register</Nav.Link>
+                <Nav>
+                    {user ? (
+                        <>
+                            <Nav.Link>Hello {user}</Nav.Link>
+                            <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                        </>
+                    ) : (
+                        <>
+                            <Nav.Link as={Link} to="/signin" className="page-scroll">Sign In</Nav.Link>
+                            <Nav.Link as={Link} to="/register" className="page-scroll">Register</Nav.Link>
+                        </>
+                    )}
                     <NavDropdown
                         title="Profil"
                         id="basic-nav-dropdown"
@@ -71,6 +84,6 @@ const MyNavbar = () => {
             </Navbar.Collapse>
         </Navbar>
     );
-};
+}
 
 export default MyNavbar;
