@@ -1,12 +1,11 @@
-// Signin.jsx
 import React, { useState } from "react";
 import { CognitoUser, AuthenticationDetails, CognitoUserPool } from "amazon-cognito-identity-js";
 import { useNavigate } from "react-router-dom";
-import "./Register.css"; // Assuming you have a CSS file for styling
+import "./Register.css";
 
 const poolData = {
-  UserPoolId: "eu-central-1_u1EUpgENY", // Replace with your User Pool ID
-  ClientId: "34b76ra579e5682vh0mjju3pud", // Replace with your App Client ID
+  UserPoolId: "eu-central-1_u1EUpgENY",
+  ClientId: "34b76ra579e5682vh0mjju3pud",
 };
 
 const userPool = new CognitoUserPool(poolData);

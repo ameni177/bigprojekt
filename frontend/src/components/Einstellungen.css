@@ -1,0 +1,55 @@
+.benutzerkonto-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+  }
+  
+  .content-container {
+    width: 700px;
+    height: 500px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: white;
+    position: relative;
+  }
+  
+  .header-content-wrapper {
+    position: relative;
+    width: 100%;
+  }
+  
+  .header-content {
+    width: 100%;
+    padding: 10px;
+    height: 50px;
+    border-bottom: 1px solid black;
+    background-color: white;
+    text-align: center;
+    position: relative;
+    background-color: rgb(185, 179, 235);
+  }
+  
+  .main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 60px;
+  }
+  
+  h1 {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: -20px;
+  }
+  

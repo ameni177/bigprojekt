@@ -64,7 +64,7 @@ function MyNavbar({ user, setUser }) {
                         </>
                     ) : (
                         <>
-                            <Nav.Link as={Link} to="/signin" className="page-scroll">Sign In</Nav.Link>
+                            <Nav.Link as={Link} to="/signin" className="page-scroll">Login</Nav.Link>
                             <Nav.Link as={Link} to="/register" className="page-scroll">Register</Nav.Link>
                         </>
                     )}

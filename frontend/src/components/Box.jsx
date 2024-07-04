@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import Signin from './Signin';
+
 
 const Box = (props) => {
   const { title, btnClass, btnTitle, price, feature, btnId } = props;
