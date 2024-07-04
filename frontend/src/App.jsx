@@ -50,14 +50,6 @@ function App() {
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/zahlungsverlauf" element={<Zahlungsverlauf />} />
             </Routes>
-            <div>
-                <h1>MySQL Data from AWS RDS</h1>
-                <ul>
-                    {data.map(item => (
-                        <li key={item.id}>{item.user}</li>
-                    ))}
-                </ul>
-            </div>
             <Footer />
         </Router>
     );
