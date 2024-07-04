@@ -1,12 +1,12 @@
 import React from 'react';
-import './Zahlungsverlauf.css'
+import './Zahlungsverlauf.css';
+import Profil from './Profil.jsx'
 
 const Zahlungsverlauf = () => {
     return (
-        <div>
-            <p>Platzhalter</p>
-        </div>
+        <>
+            <Profil />
+        </>
     );
 };
-
 export default Zahlungsverlauf;

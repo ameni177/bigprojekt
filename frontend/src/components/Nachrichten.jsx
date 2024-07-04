@@ -1,11 +1,12 @@
 import React from 'react';
-import './Nachrichten.css'
+import './Nachrichten.css';
+import Profil from './Profil.jsx'
 
 const Nachrichten = () => {
     return (
-        <div>
-            <p>Platzhalter</p>
-        </div>
+        <>
+            <Profil />
+        </>
     );
 };
 

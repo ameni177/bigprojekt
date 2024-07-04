@@ -1,12 +1,12 @@
 import React from 'react';
-import './Einstellungen.css'
+import './Einstellungen.css';
+import Profil from './Profil.jsx'
 
 const Einstellungen = () => {
     return (
-        <div>
-            <p>Platzhalter</p>
-        </div>
+        <>
+            <Profil />
+        </>
     );
 };
-
 export default Einstellungen;

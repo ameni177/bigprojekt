@@ -1,0 +1,42 @@
+.profil {
+width: 700px;
+height: 500px;
+border: 1px solid black;
+display: flex;
+justify-content: left;
+align-items: center;
+background-color: white;
+position: absolute; /* Positionierung ändern */
+top: 50%; /* Vertikal zentrieren */
+left: 50%; /* Horizontal zentrieren */
+transform: translate(-50%, -50%); /* Verschieben, um die Mitte des Containers auszurichten */
+}
+
+.vertical-navbar {
+width: 250px;
+height: 100%;
+border: 1px solid rgb(110, 109, 109);
+display: flex;
+flex-direction: column; /* Kinder-Elemente vertikal anordnen */
+justify-content: flex-start;
+align-items: center;
+background-color: white;
+box-sizing: border-box; /* Stellt sicher, dass die Padding-Werte innerhalb der Gesamtbreite und -höhe liegen */
+position: absolute;
+top: 0;
+left: 0;
+}
+
+.vertibar {
+width: 250px;
+height: 40px;
+background-color: white;
+border: 1px solid rgb(116, 113, 113);
+color: black;
+margin-bottom: 5px; /* Abstand zwischen den Buttons */
+box-sizing: border-box; /* Stellt sicher, dass die Border-Werte innerhalb der Gesamtbreite und -höhe liegen */
+}
+
+.vertibar:last-child {
+margin-bottom: 0; /* Kein Abstand nach dem letzten Button */
+}

@@ -1,11 +1,12 @@
 import React from 'react';
 import './Benutzerkonto.css'
+import Profil from './Profil.jsx'
 
 const Benutzerkonto = () => {
     return (
-        <div>
-            <p>Platzhalter</p>
-        </div>
+        <>
+            <Profil />
+        </>
     );
 };
 

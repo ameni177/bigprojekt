@@ -49,7 +49,7 @@ const Box = (props) => {
         <div className="btn-container">
           {title === "Free" ? (
             <button type="button" className={`btn btn-lg btn-block ${btnClass}`}>
-              Sign-in
+              Sign-in for free
             </button>
           ) : (
             <div id={`paypal-button-container-${btnId}`}></div>

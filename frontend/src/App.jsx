@@ -50,8 +50,8 @@ function App() {
                 <Route path="/nachrichten" element={<Nachrichten />} />
                 <Route path="/pricing" element={<Pricing />} />
                 <Route path="/profil" element={<Profil />} />
-                <Route path="/register" element={<Register setUser={setUser} />} /> {/* Pass setUser as prop */}
-                <Route path="/signin" element={<Signin setUser={setUser} />} /> {/* Pass setUser as prop */}
+                <Route path="/register" element={<Register setUser={setUser} />} />
+                <Route path="/signin" element={<Signin setUser={setUser} />} />
                 <Route path="/zahlungsverlauf" element={<Zahlungsverlauf />} />
             </Routes>
             <Footer />
