@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Benutzerkonto.css';
 import Profil from './Profil.jsx';
 
 const Benutzerkonto = () => {
+  const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    // Fetch the email from local storage
+    const emailFromLocalStorage = localStorage.getItem('userEmail');
+    if (emailFromLocalStorage) {
+      setEmail(emailFromLocalStorage);
+    }
+  }, []);
+
   return (
     <div className="benutzerkonto-container">
       <Profil />
@@ -13,8 +23,9 @@ const Benutzerkonto = () => {
           </div>
         </div>
         <div className="main-content">
-          <div>
-            <h2>Benutzerkonto-Inhalt</h2>
+          <div className="email-container">
+            <h3>E-Mail:</h3>
+            <p>{email}</p>
           </div>
         </div>
       </div>
