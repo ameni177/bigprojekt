@@ -45,8 +45,10 @@ function MyNavbar({ user, setUser }) {
 
     const handleLogout = () => {
         setUser(null); 
-        navigate('/'); // Clear the user state on logout
+        localStorage.clear(); // Clear the local storage
+        navigate('/'); // Navigate to the home page
     };
+    
 
     return (
         <Navbar fixed="top" className="navbar-transparent" expand="lg">

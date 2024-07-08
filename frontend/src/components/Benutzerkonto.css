@@ -43,7 +43,7 @@
   width: 100%;
   height: 100%;
   margin-top: 60px;
-  flex-direction: column; /* Added to align items vertically */
+  flex-direction: column;
 }
 
 h1 {
@@ -54,6 +54,9 @@ h1 {
 }
 
 .email-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 20px;
 }
 
@@ -64,4 +67,52 @@ h1 {
 
 .email-container p {
   margin: 5px 0 0;
+}
+
+.email-container button {
+  margin-top: 10px;
+  padding: 5px 10px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-content input {
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 200px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.modal-buttons button {
+  margin: 5px;
+  padding: 8px;
+  width: 100px;
+}
+
+.error {
+  color: red;
 }
