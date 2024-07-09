@@ -21,7 +21,10 @@ app.use(bodyParser.json());
         res.json(rows);
     });
  });
- app.post('/api/conferences', (req, res) => {
+
+
+
+app.post('/api/conferences', (req, res) => {
     const { name, description, startdate, enddate, starttime, endtime, location, link, participant_emails } = req.body;
 
     const query = 'INSERT INTO databank.Conference1 (name, description, startdate, enddate, starttime, endtime, location, link, participant_email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
@@ -40,6 +43,24 @@ app.use(bodyParser.json());
 
     res.status(201).send('Conference inserted successfully');
 });
+
+app.post('/api/benutzer', (req, res) => {
+    const { email, vorname, nachname, adresse, telefonnummer } = req.body;
+
+    const query = 'INSERT INTO benutzer (email, vorname, nachname, adresse, telefonnummer) VALUES (?, ?, ?, ?, ?)';
+
+    mysqlConnection.query(query, [email, vorname, nachname, adresse, telefonnummer], (err, result) => {
+        if (err) {
+            console.error('Error inserting user:', err);
+            res.status(500).send('Error inserting user');
+            return;
+        }
+        console.log('Inserted user:', result);
+        res.status(201).send('User data inserted successfully');
+    });
+});
+
+
 
 // app.post('/api/data1', (req, res) => {
 //     mysqlConnection.query('INSERT INTO test (id, user) VALUES (3, "erik")', (err, result) => {

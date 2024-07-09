@@ -1,25 +1,73 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './EditAddressModal.css';
 
-const EditAddressModal = ({ address, phone, onClose }) => {
+const EditAddressModal = () => {
+  const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [newAddress, setNewAddress] = useState(address);
-  const [newPhone, setNewPhone] = useState(phone);
+  const [newAddress, setNewAddress] = useState('');
+  const [newPhone, setNewPhone] = useState('');
 
-  const handleSave = () => {
-    onClose({
-      firstName,
-      lastName,
-      address: newAddress,
-      phone: newPhone,
-    });
+  useEffect(() => {
+    const storedEmail = localStorage.getItem('userEmail');
+    if (storedEmail) {
+      setEmail(storedEmail);
+      fetchUserData(storedEmail);
+    }
+  }, []);
+
+  const fetchUserData = async (email) => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/benutzer`);
+      const data = await response.json();
+      const userData = data.find(user => user.email === email);
+      if (userData) {
+        setEmail(userData.email);
+        setFirstName(userData.vorname);
+        setLastName(userData.nachname);
+        setNewAddress(userData.adresse);
+        setNewPhone(userData.telefonnummer);
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
+
+  const handleSave = async () => {
+    const userData = {
+      email: email,
+      vorname: firstName,
+      nachname: lastName,
+      adresse: newAddress,
+      telefonnummer: newPhone,
+    };
+
+    try {
+      const response = await fetch('http://localhost:3001/api/benutzer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (response.ok) {
+        console.log('User data saved successfully');
+        // Optional: Modal schließen oder eine Erfolgsmeldung anzeigen
+      } else {
+        console.error('Error saving user data');
+      }
+    } catch (error) {
+      console.error('Error saving user data:', error);
+    }
   };
 
   return (
     <div className="modal">
       <div className="modal-content">
         <h2>Adresse bearbeiten</h2>
+        <label>Email:</label>
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} disabled />
         <label>Vorname:</label>
         <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
         <label>Nachname:</label>
@@ -29,7 +77,7 @@ const EditAddressModal = ({ address, phone, onClose }) => {
         <label>Telefonnummer:</label>
         <input type="text" value={newPhone} onChange={(e) => setNewPhone(e.target.value)} />
         <button onClick={handleSave}>Speichern</button>
-        <button onClick={() => onClose(null)}>Abbrechen</button>
+        <button onClick={() => document.getElementById('myModal').style.display = 'none'}>Abbrechen</button>
       </div>
     </div>
   );

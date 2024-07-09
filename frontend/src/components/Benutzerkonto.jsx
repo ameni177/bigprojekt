@@ -69,16 +69,8 @@ const Benutzerkonto = () => {
     setIsEditingEmail(true);
   };
 
-  const handleEditNameClick = () => {
-    setIsEditingName(true);
-  };
-
   const handleEditAddressClick = () => {
     setIsEditingAddress(true);
-  };
-
-  const handleEditPhoneClick = () => {
-    setIsEditingPhone(true);
   };
 
   const handleChangePasswordClick = () => {
@@ -92,13 +84,6 @@ const Benutzerkonto = () => {
     setIsEditingEmail(false);
   };
 
-  const handleCloseNameModal = (newName) => {
-    if (newName !== null) {
-      setName(newName);
-    }
-    setIsEditingName(false);
-  };
-
   const handleCloseAddressModal = (data) => {
     if (data !== null) {
       setName(`${data.firstName} ${data.lastName}`);
@@ -106,13 +91,6 @@ const Benutzerkonto = () => {
       setPhone(data.phone);
     }
     setIsEditingAddress(false);
-  };
-
-  const handleClosePhoneModal = (newPhone) => {
-    if (newPhone !== null) {
-      setPhone(newPhone);
-    }
-    setIsEditingPhone(false);
   };
 
   const handleClosePasswordModal = () => {
