@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Benutzerkonto.css';
 import Profil from './Profil.jsx';
 import EditEmailModal from './EditEmailModal.jsx';
+import EditAddressModal from './EditAddressModal.jsx';
 import ChangePasswordModal from './ChangePasswordModal.jsx';
 import { CognitoUserPool, CognitoUser } from 'amazon-cognito-identity-js';
 
@@ -98,9 +99,11 @@ const Benutzerkonto = () => {
     setIsEditingName(false);
   };
 
-  const handleCloseAddressModal = (newAddress) => {
-    if (newAddress !== null) {
-      setAddress(newAddress);
+  const handleCloseAddressModal = (data) => {
+    if (data !== null) {
+      setName(`${data.firstName} ${data.lastName}`);
+      setAddress(data.address);
+      setPhone(data.phone);
     }
     setIsEditingAddress(false);
   };
@@ -131,19 +134,9 @@ const Benutzerkonto = () => {
           <button onClick={handleEditEmailClick}>Bearbeiten</button>
         </div>
         <div className="form-group">
-          <label>Name:</label>
-          <p>{name}</p>
-          <button onClick={handleEditNameClick}>Bearbeiten</button>
-        </div>
-        <div className="form-group">
           <label>Adresse:</label>
           <p>{address}</p>
           <button onClick={handleEditAddressClick}>Bearbeiten</button>
-        </div>
-        <div className="form-group">
-          <label>Telefonnummer:</label>
-          <p>{phone}</p>
-          <button onClick={handleEditPhoneClick}>Bearbeiten</button>
         </div>
         <div className="form-group">
           <label>Passwort:</label>
@@ -151,7 +144,7 @@ const Benutzerkonto = () => {
         </div>
       </div>
       {isEditingEmail && <EditEmailModal email={email} onClose={handleCloseEmailModal} />}
-      {isEditingAddress && <EditAddressModal address={address} onClose={handleCloseAddressModal} />}
+      {isEditingAddress && <EditAddressModal address={address} phone={phone} onClose={handleCloseAddressModal} />}
       {isChangingPassword && <ChangePasswordModal onClose={handleClosePasswordModal} />}
     </div>
   );
