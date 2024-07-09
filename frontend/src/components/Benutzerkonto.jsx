@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import './Benutzerkonto.css';
 import Profil from './Profil.jsx';
 import EditEmailModal from './EditEmailModal.jsx';
-import EditNameModal from './EditNameModal.jsx';
-import ChangePasswordModal from './ChangePasswordModal.jsx'; // Importieren Sie die ChangePasswordModal-Komponente
-import { CognitoUserPool } from 'amazon-cognito-identity-js';
+import ChangePasswordModal from './ChangePasswordModal.jsx';
+import { CognitoUserPool, CognitoUser } from 'amazon-cognito-identity-js';
 
 const poolData = {
-  UserPoolId: "eu-central-1_u1EUpgENY",
-  ClientId: "34b76ra579e5682vh0mjju3pud",
+  UserPoolId: "eu-central-1_9qZhZhfNw",
+  ClientId: "1nqan7a5peja3fv8n9ofp5u7pm",
 };
 
 const userPool = new CognitoUserPool(poolData);
@@ -16,18 +15,52 @@ const userPool = new CognitoUserPool(poolData);
 const Benutzerkonto = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [address, setAddress] = useState('');
+  const [phone, setPhone] = useState('');
   const [isEditingEmail, setIsEditingEmail] = useState(false);
   const [isEditingName, setIsEditingName] = useState(false);
-  const [isChangingPassword, setIsChangingPassword] = useState(false); // Zustand für Passwortänderung
+  const [isEditingAddress, setIsEditingAddress] = useState(false);
+  const [isEditingPhone, setIsEditingPhone] = useState(false);
+  const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const emailFromLocalStorage = localStorage.getItem('userEmail');
-    const nameFromLocalStorage = localStorage.getItem('userName');
-    if (emailFromLocalStorage) {
-      setEmail(emailFromLocalStorage);
-    }
-    if (nameFromLocalStorage) {
-      setName(nameFromLocalStorage);
+    const currentUser = userPool.getCurrentUser();
+
+    if (currentUser) {
+      currentUser.getSession((err, session) => {
+        if (err || !session.isValid()) {
+          setIsLoggedIn(false);
+        } else {
+          setIsLoggedIn(true);
+          currentUser.getUserAttributes((err, attributes) => {
+            if (err) {
+              console.log(err);
+              return;
+            }
+            attributes.forEach(attribute => {
+              switch (attribute.getName()) {
+                case 'email':
+                  setEmail(attribute.getValue());
+                  break;
+                case 'name':
+                  setName(attribute.getValue());
+                  break;
+                case 'address':
+                  setAddress(attribute.getValue());
+                  break;
+                case 'phone_number':
+                  setPhone(attribute.getValue());
+                  break;
+                default:
+                  break;
+              }
+            });
+          });
+        }
+      });
+    } else {
+      setIsLoggedIn(false);
     }
   }, []);
 
@@ -37,6 +70,14 @@ const Benutzerkonto = () => {
 
   const handleEditNameClick = () => {
     setIsEditingName(true);
+  };
+
+  const handleEditAddressClick = () => {
+    setIsEditingAddress(true);
+  };
+
+  const handleEditPhoneClick = () => {
+    setIsEditingPhone(true);
   };
 
   const handleChangePasswordClick = () => {
@@ -57,38 +98,60 @@ const Benutzerkonto = () => {
     setIsEditingName(false);
   };
 
+  const handleCloseAddressModal = (newAddress) => {
+    if (newAddress !== null) {
+      setAddress(newAddress);
+    }
+    setIsEditingAddress(false);
+  };
+
+  const handleClosePhoneModal = (newPhone) => {
+    if (newPhone !== null) {
+      setPhone(newPhone);
+    }
+    setIsEditingPhone(false);
+  };
+
   const handleClosePasswordModal = () => {
     setIsChangingPassword(false);
   };
 
+  if (!isLoggedIn) {
+    return <div>Bitte loggen Sie sich ein, um Ihre Kontoinformationen zu sehen.</div>;
+  }
+
   return (
     <div className="benutzerkonto-container">
       <Profil />
-      <div className="content-container">
-        <div className="header-content-wrapper">
-          <div className="header-content">
-            <h1>Benutzerkonto</h1>
-          </div>
+      <div className="form-container">
+        <h1>Benutzerkonto</h1>
+        <div className="form-group">
+          <label>E-Mail:</label>
+          <p>{email}</p>
+          <button onClick={handleEditEmailClick}>Bearbeiten</button>
         </div>
-        <div className="main-content">
-          <div className="email-container">
-            <h3>E-Mail:</h3>
-            <p>{email}</p>
-            <button onClick={handleEditEmailClick}>Bearbeiten</button>
-          </div>
-          <div className="name-container">
-            <h3>Name:</h3>
-            <p>{name}</p>
-            <button onClick={handleEditNameClick}>Bearbeiten</button>
-          </div>
-          <div className="password-container">
-            <h3>Passwort:</h3>
-            <button onClick={handleChangePasswordClick}>Passwort ändern</button>
-          </div>
+        <div className="form-group">
+          <label>Name:</label>
+          <p>{name}</p>
+          <button onClick={handleEditNameClick}>Bearbeiten</button>
+        </div>
+        <div className="form-group">
+          <label>Adresse:</label>
+          <p>{address}</p>
+          <button onClick={handleEditAddressClick}>Bearbeiten</button>
+        </div>
+        <div className="form-group">
+          <label>Telefonnummer:</label>
+          <p>{phone}</p>
+          <button onClick={handleEditPhoneClick}>Bearbeiten</button>
+        </div>
+        <div className="form-group">
+          <label>Passwort:</label>
+          <button onClick={handleChangePasswordClick}>Passwort ändern</button>
         </div>
       </div>
       {isEditingEmail && <EditEmailModal email={email} onClose={handleCloseEmailModal} />}
-      {isEditingName && <EditNameModal name={name} onClose={handleCloseNameModal} />}
+      {isEditingAddress && <EditAddressModal address={address} onClose={handleCloseAddressModal} />}
       {isChangingPassword && <ChangePasswordModal onClose={handleClosePasswordModal} />}
     </div>
   );

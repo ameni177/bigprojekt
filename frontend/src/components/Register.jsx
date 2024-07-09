@@ -6,8 +6,8 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import moment from 'moment'; // Import moment library
 
 const poolData = {
-    UserPoolId: "eu-central-1_u1EUpgENY", // Replace with your User Pool ID
-    ClientId: "34b76ra579e5682vh0mjju3pud", // Replace with your App Client ID
+    UserPoolId: "eu-central-1_9qZhZhfNw", // Replace with your User Pool ID
+    ClientId: "1nqan7a5peja3fv8n9ofp5u7pm", // Replace with your App Client ID
 };
 
 const userPool = new CognitoUserPool(poolData);

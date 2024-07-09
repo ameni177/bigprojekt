@@ -3,50 +3,69 @@ import { CognitoUserPool, CognitoUserAttribute } from 'amazon-cognito-identity-j
 import AWS from 'aws-sdk';
 
 const poolData = {
-  UserPoolId: "eu-central-1_u1EUpgENY",
-  ClientId: "34b76ra579e5682vh0mjju3pud",
+  UserPoolId: "eu-central-1_9qZhZhfNw",
+  ClientId: "1nqan7a5peja3fv8n9ofp5u7pm",
 };
 
 const userPool = new CognitoUserPool(poolData);
 
-const EditNameModal = ({ name, onClose }) => {
-  const [newName, setNewName] = useState(name);
+const EditEmailModal = ({ email, onClose }) => {
+  const [newEmail, setNewEmail] = useState(email);
+  const [verificationCode, setVerificationCode] = useState('');
   const [error, setError] = useState('');
+  const [showVerification, setShowVerification] = useState(false);
 
   const handleSave = () => {
-    console.log("Speichern-Button geklickt");
     const cognitoUser = userPool.getCurrentUser();
 
     if (cognitoUser) {
       cognitoUser.getSession((err, session) => {
         if (err) {
-          console.error("Fehler beim Abrufen der Sitzung:", err);
           setError(err.message || JSON.stringify(err));
           return;
         }
 
-        console.log("Sitzung erfolgreich abgerufen:", session);
-
         const attributeList = [];
         const attribute = new CognitoUserAttribute({
-          Name: 'name',
-          Value: newName,
+          Name: 'email',
+          Value: newEmail,
         });
         attributeList.push(attribute);
 
         cognitoUser.updateAttributes(attributeList, (err, result) => {
           if (err) {
-            console.error("Fehler beim Aktualisieren der Attribute:", err);
             setError(err.message || JSON.stringify(err));
           } else {
-            console.log("Attribute erfolgreich aktualisiert:", result);
-            localStorage.setItem('userName', newName);
-            onClose(newName);
+            setShowVerification(true);
           }
         });
       });
     } else {
-      console.error("Benutzer ist nicht authentifiziert");
+      setError("User is not authenticated");
+    }
+  };
+
+  const handleVerify = () => {
+    const cognitoUser = userPool.getCurrentUser();
+
+    if (cognitoUser) {
+      cognitoUser.getSession((err, session) => {
+        if (err) {
+          setError(err.message || JSON.stringify(err));
+          return;
+        }
+
+        cognitoUser.verifyAttribute('email', verificationCode, {
+          onSuccess: (result) => {
+            localStorage.setItem('userEmail', newEmail);
+            onClose(newEmail);
+          },
+          onFailure: (err) => {
+            setError(err.message || JSON.stringify(err));
+          },
+        });
+      });
+    } else {
       setError("User is not authenticated");
     }
   };
@@ -54,20 +73,39 @@ const EditNameModal = ({ name, onClose }) => {
   return (
     <div className="modal">
       <div className="modal-content">
-        <h2>Benutzernamen bearbeiten</h2>
-        <input
-          type="text"
-          value={newName}
-          onChange={(e) => setNewName(e.target.value)}
-        />
-        {error && <p className="error">{error}</p>}
-        <div className="modal-buttons">
-          <button onClick={handleSave}>Speichern</button>
-          <button onClick={() => onClose(null)}>Abbrechen</button>
-        </div>
+        <h2>Email bearbeiten</h2>
+        {!showVerification ? (
+          <>
+            <input
+              type="email"
+              value={newEmail}
+              onChange={(e) => setNewEmail(e.target.value)}
+            />
+            {error && <p className="error">{error}</p>}
+            <div className="modal-buttons">
+              <button onClick={handleSave}>Speichern</button>
+              <button onClick={() => onClose(null)}>Abbrechen</button>
+            </div>
+          </>
+        ) : (
+          <>
+            <p>Ein Bestätigungscode wurde an {newEmail} gesendet.</p>
+            <input
+              type="text"
+              placeholder="Bestätigungscode eingeben"
+              value={verificationCode}
+              onChange={(e) => setVerificationCode(e.target.value)}
+            />
+            {error && <p className="error">{error}</p>}
+            <div className="modal-buttons">
+              <button onClick={handleVerify}>Verifizieren</button>
+              <button onClick={() => onClose(null)}>Abbrechen</button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
 };
 
-export default EditNameModal;
+export default EditEmailModal;

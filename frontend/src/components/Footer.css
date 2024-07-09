@@ -59,13 +59,14 @@ body.dark-mode {
 .dark-mode-button {
   background-color: #333;
   color: white;
-  padding: 10px 20px;
   height: 30px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   flex-shrink: 0;
   border-radius: 10px;
+  margin-bottom: 20px;
 }
+
 
 .text {
   color: white;
