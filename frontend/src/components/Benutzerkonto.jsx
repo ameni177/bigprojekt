@@ -122,7 +122,7 @@ const Benutzerkonto = () => {
         </div>
       </div>
       {isEditingEmail && <EditEmailModal email={email} onClose={handleCloseEmailModal} />}
-      {isEditingAddress && <EditAddressModal address={address} phone={phone} onClose={handleCloseAddressModal} />}
+      {isEditingAddress && <EditAddressModal onClose={handleCloseAddressModal} />}
       {isChangingPassword && <ChangePasswordModal onClose={handleClosePasswordModal} />}
     </div>
   );

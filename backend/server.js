@@ -47,19 +47,38 @@ app.post('/api/conferences', (req, res) => {
 app.post('/api/benutzer', (req, res) => {
     const { email, vorname, nachname, adresse, telefonnummer } = req.body;
 
-    const query = 'INSERT INTO benutzer (email, vorname, nachname, adresse, telefonnummer) VALUES (?, ?, ?, ?, ?)';
-
-    mysqlConnection.query(query, [email, vorname, nachname, adresse, telefonnummer], (err, result) => {
+    const selectQuery = 'SELECT * FROM benutzer WHERE email = ?';
+    mysqlConnection.query(selectQuery, [email], (err, results) => {
         if (err) {
-            console.error('Error inserting user:', err);
-            res.status(500).send('Error inserting user');
+            console.error('Error selecting user:', err);
+            res.status(500).send('Error selecting user');
             return;
         }
-        console.log('Inserted user:', result);
-        res.status(201).send('User data inserted successfully');
+
+        console.log('Current user data:', results);
+
+        const query = `
+            INSERT INTO benutzer (email, vorname, nachname, adresse, telefonnummer)
+            VALUES (?, ?, ?, ?, ?)
+            AS new
+            ON DUPLICATE KEY UPDATE
+            vorname = new.vorname,
+            nachname = new.nachname,
+            adresse = new.adresse,
+            telefonnummer = new.telefonnummer
+        `;
+
+        mysqlConnection.query(query, [email, vorname, nachname, adresse, telefonnummer], (err, result) => {
+            if (err) {
+                console.error('Error inserting or updating user:', err);
+                res.status(500).send('Error inserting or updating user');
+                return;
+            }
+
+            console.log('Inserted or updated user:', result);
+        });
     });
 });
-
 
 
 // app.post('/api/data1', (req, res) => {

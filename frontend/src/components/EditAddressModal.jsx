@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './EditAddressModal.css';
 
-const EditAddressModal = () => {
+const EditAddressModal = ({ onClose }) => {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -41,7 +41,7 @@ const EditAddressModal = () => {
       adresse: newAddress,
       telefonnummer: newPhone,
     };
-
+  
     try {
       const response = await fetch('http://localhost:3001/api/benutzer', {
         method: 'POST',
@@ -50,17 +50,23 @@ const EditAddressModal = () => {
         },
         body: JSON.stringify(userData),
       });
-
+  
       if (response.ok) {
-        console.log('User data saved successfully');
-        // Optional: Modal schließen oder eine Erfolgsmeldung anzeigen
+        alert('Daten erfolgreich gespeichert, jetzt verkaufen wir sie an Google.');
       } else {
-        console.error('Error saving user data');
+        alert('Fehler beim abspeichern, bitte wende dich an den Support.');
       }
-    } catch (error) {
-      console.error('Error saving user data:', error);
+    } finally {
+      onClose({
+        firstName,
+        lastName,
+        address: newAddress,
+        phone: newPhone,
+      });
     }
   };
+  
+  
 
   return (
     <div className="modal">
@@ -77,7 +83,7 @@ const EditAddressModal = () => {
         <label>Telefonnummer:</label>
         <input type="text" value={newPhone} onChange={(e) => setNewPhone(e.target.value)} />
         <button onClick={handleSave}>Speichern</button>
-        <button onClick={() => document.getElementById('myModal').style.display = 'none'}>Abbrechen</button>
+        <button onClick={() => onClose(null)}>Abbrechen</button>
       </div>
     </div>
   );
