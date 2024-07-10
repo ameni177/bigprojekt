@@ -113,7 +113,6 @@ const Benutzerkonto = () => {
         </div>
         <div className="form-group">
           <label>Adresse:</label>
-          <p>{address}</p>
           <button onClick={handleEditAddressClick}>Bearbeiten</button>
         </div>
         <div className="form-group">
