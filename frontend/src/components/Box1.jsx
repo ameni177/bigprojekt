@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Box1 = (props) => {
+const Box = (props) => {
   const { title, btnClass, btnTitle, price, feature, btnId } = props;
   const navigate = useNavigate();
 
@@ -55,7 +55,7 @@ const Box1 = (props) => {
               className={`btn btn-lg btn-block ${btnClass}`}
               onClick={() => navigate('/register')}
             >
-              AKTIV
+              Sign-in for free
             </button>
           ) : (
             <div id={`paypal-button-container-${btnId}`}></div>
@@ -66,4 +66,4 @@ const Box1 = (props) => {
   );
 };
 
-export default Box1;
+export default Box;

@@ -80,6 +80,20 @@ app.post('/api/benutzer', (req, res) => {
     });
 });
 
+app.post('/api/transactions', (req, res) => {
+    const { amount, date, email } = req.body;
+  
+    const query = 'INSERT INTO transactions (amount, date, email) VALUES (?, ?, ?)';
+    connection.execute(query, [amount, date, email], (err, results) => {
+      if (err) {
+        console.error('Fehler beim Einfügen der Daten:', err);
+        res.status(500).send({ message: 'Fehler beim Einfügen der Daten' });
+      } else {
+        res.status(200).send({ message: 'Transaktion erfolgreich gespeichert!', results });
+      }
+    });
+  });
+
 
 // app.post('/api/data1', (req, res) => {
 //     mysqlConnection.query('INSERT INTO test (id, user) VALUES (3, "erik")', (err, result) => {

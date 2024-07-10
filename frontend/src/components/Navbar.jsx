@@ -101,9 +101,7 @@ function MyNavbar({ user, setUser }) {
                                 show={showSubMenu}
                             >
                                 <NavDropdown.Item as={Link} to="/benutzerkonto" className="page-scroll">Benutzerkonto</NavDropdown.Item>
-                                <NavDropdown.Item as={Link} to="/zahlungsverlauf" className="page-scroll">Zahlungsverlauf</NavDropdown.Item>
                                 <NavDropdown.Item as={Link} to="/nachrichten" className="page-scroll">Nachrichten</NavDropdown.Item>
-                                <NavDropdown.Item as={Link} to="/einstellungen" className="page-scroll">Einstellungen</NavDropdown.Item>
                             </NavDropdown>
                             <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
                         </>

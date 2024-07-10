@@ -7,7 +7,6 @@ const Profil = () => {
     <nav className="vertical-navbar">
       <ul>
         <li><Link to="/benutzerkonto" className="vertibar">Benutzerkonto</Link></li>
-        <li><Link to="/zahlungsverlauf" className="vertibar">Zahlungsverlauf</Link></li>
         <li><Link to="/nachrichten" className="vertibar">Benachrichtigungen</Link></li>
       </ul>
     </nav>

@@ -21,6 +21,7 @@ const Box = (props) => {
             })}
         </ul>
         <div className="btn-container">
+          {title === 'Free' ? (
             <button
               type="button"
               className={`btn btn-lg btn-block ${btnClass}`}
@@ -28,10 +29,18 @@ const Box = (props) => {
             >
               Sign-in for free
             </button>
+          ) : (
+            <button
+              type="button"
+              className={`btn btn-lg btn-block ${btnClass}`}
+              onClick={() => navigate('/register')}
+            >
+              Sign-in for purchase
+            </button>
+          )}
         </div>
       </div>
     </div>
   );
 };
-
 export default Box;

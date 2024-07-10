@@ -1,7 +1,6 @@
 // App.jsx
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import axios from 'axios';
 import './index.css';
 import MyNavbar from './components/Navbar';
 import Conference from './components/Conference';
@@ -15,7 +14,6 @@ import Pricing1 from './components/Pricing1';
 import Profil from './components/Profil';
 import Register from './components/Register';
 import Signin from './components/Signin';
-import Zahlungsverlauf from './components/Zahlungsverlauf';
 import Home from './components/Home'; // Import the Home component
 
 function App() {
@@ -39,7 +37,6 @@ function App() {
                 <Route path="/profil" element={<Profil />} />
                 <Route path="/register" element={<Register setUser={setUser} />} />
                 <Route path="/signin" element={<Signin setUser={setUser} />} />
-                <Route path="/zahlungsverlauf" element={<Zahlungsverlauf />} />
             </Routes>
             <Footer />
         </Router>
