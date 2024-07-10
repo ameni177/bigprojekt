@@ -81,7 +81,12 @@ function MyNavbar({ user, setUser }) {
                 <Nav className="me-auto">
                     <Nav.Link as={Link} to="/" className="page-scroll">Home</Nav.Link>
                     <Nav.Link as={Link} to="/conference" className="page-scroll">Conference</Nav.Link>
-                    <Nav.Link as={Link} to="/pricing" className="page-scroll">Pricing</Nav.Link>
+                    {!user && (
+                        <Nav.Link as={Link} to="/pricing" className="page-scroll">Pricing</Nav.Link>
+                    )}
+                    {user && (
+                        <Nav.Link as={Link} to="/pricing1" className="page-scroll">Pricing</Nav.Link>
+                    )}
                     <Nav.Link as={Link} to="/about" className="page-scroll">About us</Nav.Link>
                     <Nav.Link as={Link} to="/kontakt" className="page-scroll">Kontakt</Nav.Link>
                 </Nav>
