@@ -1,13 +1,18 @@
-/* DarkModeButton.css */
 .dark-mode-button {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
+  background-color: white;
+  color: black;
+  height: 30px;
+  width: 100px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: solid 1px;
+  margin-bottom: 10px;
+}
   
   .dark-mode-button:hover {
-    background-color: #555;
+    background-color: #000000;
+    color: rgb(255, 255, 255);
   }
   

@@ -1,0 +1,87 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .kontakt-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 2rem;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+  
+  .section-one {
+    text-align: center;
+    width: 100%;
+    background: url('./media/web\ binar\ 1\ deget.jpg') no-repeat center center/cover; /* Replace 'YourBackgroundImage.jpg' with your image filename */
+    position: relative;
+    color: rgb(255, 255, 255);
+    padding: 50px;
+    min-height: 50vh;
+    height: 50vh; /* Ensure it covers half the screen height */
+  }
+  
+  .form-section {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 40%; /* Adjusted to give more space to the form */
+    margin-right: 2rem;
+  }
+  
+  form label {
+    margin-bottom: 0.5rem;
+  }
+  
+  form input,
+  form textarea {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .custom-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #D8BFD8; /* Lilac color */
+    color: white;
+    border: none;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 8px;
+    transition: background-color 0.25s, color 0.25s;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .custom-button:hover {
+    background-color: #643cd3; /* Slightly darker lilac for hover effect */
+    color: lightgray;
+  }
+  
+  .info-section {
+    width: 55%; /* Adjusted to give more space to the info section */
+    background-color: rgba(149, 103, 201, 0); /* Semi-transparent lilac color */
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  
+  .info-section p {
+    margin-bottom: 3rem;
+    font-size: 1.2rem; /* Increase font size */
+  }
+  
+  
