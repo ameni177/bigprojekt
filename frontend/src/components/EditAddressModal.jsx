@@ -53,7 +53,7 @@ const EditAddressModal = ({ onClose }) => {
         alert('Fehler beim abspeichern, bitte wende dich an den Support.');
       }
     } finally {
-      onClose();
+      onClose(userData);
     }
   };
   

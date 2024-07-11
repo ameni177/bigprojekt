@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css';
 import { useNavigate } from "react-router-dom";
 import { CognitoUserPool, CognitoUser } from 'amazon-cognito-identity-js';
+import Signin from './Signin';
 
 const poolData = {
   UserPoolId: "eu-central-1_u1EUpgENY",
@@ -16,6 +17,7 @@ const userPool = new CognitoUserPool(poolData);
 function MyNavbar({ user, setUser }) {
     const [showSubMenu, setShowSubMenu] = useState(false);
     const [userName, setUserName] = useState('');
+    const [modalIsOpen, setModalIsOpen] = useState(false);
     const timeoutRef = useRef(null);
     const navigate = useNavigate();
 
@@ -70,50 +72,61 @@ function MyNavbar({ user, setUser }) {
             currentUser.signOut();
         }
         setUser(null);
-        localStorage.clear(); // Clear the local storage
-        navigate('/'); // Navigate to the home page
+        localStorage.clear();
+        navigate('/');
+    };
+
+    const openModal = () => {
+        setModalIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalIsOpen(false);
     };
 
     return (
-        <Navbar fixed="top" className="navbar-transparent" expand="lg">
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-                    <Nav.Link as={Link} to="/" className="page-scroll">Home</Nav.Link>
-                    <Nav.Link as={Link} to="/conference" className="page-scroll">Conference</Nav.Link>
-                    {!user && (
-                        <Nav.Link as={Link} to="/pricing" className="page-scroll">Pricing</Nav.Link>
-                    )}
-                    {user && (
-                        <Nav.Link as={Link} to="/pricing1" className="page-scroll">Pricing</Nav.Link>
-                    )}
-                    <Nav.Link as={Link} to="/about" className="page-scroll">About us</Nav.Link>
-                    <Nav.Link as={Link} to="/kontakt" className="page-scroll">Kontakt</Nav.Link>
-                </Nav>
-                <Nav>
-                    {user ? (
-                        <>
-                            <NavDropdown
-                                title={`Hello ${user}`}
-                                id="basic-nav-dropdown"
-                                onMouseEnter={handleMouseEnter}
-                                onMouseLeave={handleMouseLeave}
-                                show={showSubMenu}
-                            >
-                                <NavDropdown.Item as={Link} to="/benutzerkonto" className="page-scroll">Benutzerkonto</NavDropdown.Item>
-                                <NavDropdown.Item as={Link} to="/nachrichten" className="page-scroll">Nachrichten</NavDropdown.Item>
-                            </NavDropdown>
-                            <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-                        </>
-                    ) : (
-                        <>
-                            <Nav.Link as={Link} to="/signin" className="page-scroll">Login</Nav.Link>
-                            <Nav.Link as={Link} to="/register" className="page-scroll">Register</Nav.Link>
-                        </>
-                    )}
-                </Nav>
-            </Navbar.Collapse>
-        </Navbar>
+        <>
+            <Navbar fixed="top" className="navbar-transparent" expand="lg">
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                        <Nav.Link as={Link} to="/" className="page-scroll">Home</Nav.Link>
+                        <Nav.Link as={Link} to="/conference" className="page-scroll">Conference</Nav.Link>
+                        {!user && (
+                            <Nav.Link as={Link} to="/pricing" className="page-scroll">Pricing</Nav.Link>
+                        )}
+                        {user && (
+                            <Nav.Link as={Link} to="/pricing1" className="page-scroll">Pricing</Nav.Link>
+                        )}
+                        <Nav.Link as={Link} to="/about" className="page-scroll">About us</Nav.Link>
+                        <Nav.Link as={Link} to="/kontakt" className="page-scroll">Kontakt</Nav.Link>
+                    </Nav>
+                    <Nav>
+                        {user ? (
+                            <>
+                                <NavDropdown
+                                    title={`Hello ${user}`}
+                                    id="basic-nav-dropdown"
+                                    onMouseEnter={handleMouseEnter}
+                                    onMouseLeave={handleMouseLeave}
+                                    show={showSubMenu}
+                                >
+                                    <NavDropdown.Item as={Link} to="/benutzerkonto" className="page-scroll">Benutzerkonto</NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} to="/nachrichten" className="page-scroll">Nachrichten</NavDropdown.Item>
+                                </NavDropdown>
+                                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                            </>
+                        ) : (
+                            <>
+                                <Nav.Link onClick={openModal} className="page-scroll">Login</Nav.Link>
+                                <Nav.Link as={Link} to="/register" className="page-scroll">Register</Nav.Link>
+                            </>
+                        )}
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
+            <Signin setUser={setUser} modalIsOpen={modalIsOpen} closeModal={closeModal} />
+        </>
     );
 }
 

@@ -73,9 +73,10 @@ app.post('/api/benutzer', (req, res) => {
                 console.error('Error inserting or updating user:', err);
                 res.status(500).send('Error inserting or updating user');
                 return;
-            }
-
+            } else {
             console.log('Inserted or updated user:', result);
+            res.status(200).send();
+            };
         });
     });
 });

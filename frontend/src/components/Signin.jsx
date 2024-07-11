@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { CognitoUser, AuthenticationDetails, CognitoUserPool } from "amazon-cognito-identity-js";
 import { useNavigate } from "react-router-dom";
+import Modal from 'react-modal';
 import "./Signin.css";
 
 const poolData = {
@@ -10,7 +11,7 @@ const poolData = {
 
 const userPool = new CognitoUserPool(poolData);
 
-const Signin = ({ setUser }) => {
+const Signin = ({ setUser, modalIsOpen, closeModal }) => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [Name, setName] = useState("");
@@ -57,6 +58,7 @@ const Signin = ({ setUser }) => {
           alert("Login successful!");
           alert(Email)
           navigate('/'); // Redirect to home page after successful login
+          closeModal(); // Close the modal
         });
       },
       onFailure: (err) => {
@@ -67,7 +69,13 @@ const Signin = ({ setUser }) => {
   };
 
   return (
-    <>
+    <Modal
+      isOpen={modalIsOpen}
+      onRequestClose={closeModal}
+      contentLabel="Sign In Modal"
+      className="signin-modal"
+      overlayClassName="signin-modal-overlay"
+    >
       <h1 className="h1-design">Sign In to Your Account</h1>
       <div className="form-container">
         <div className="input-container">
@@ -104,7 +112,7 @@ const Signin = ({ setUser }) => {
           Sign In
         </button>
       </div>
-    </>
+    </Modal>
   );
 };
 
