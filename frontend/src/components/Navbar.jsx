@@ -6,6 +6,7 @@ import './Navbar.css';
 import { useNavigate } from "react-router-dom";
 import { CognitoUserPool, CognitoUser } from 'amazon-cognito-identity-js';
 import Signin from './Signin';
+import Register from './Register';
 
 const poolData = {
   UserPoolId: "eu-central-1_u1EUpgENY",
@@ -17,7 +18,8 @@ const userPool = new CognitoUserPool(poolData);
 function MyNavbar({ user, setUser }) {
     const [showSubMenu, setShowSubMenu] = useState(false);
     const [userName, setUserName] = useState('');
-    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [signinModalIsOpen, setSigninModalIsOpen] = useState(false);
+    const [registerModalIsOpen, setRegisterModalIsOpen] = useState(false);
     const timeoutRef = useRef(null);
     const navigate = useNavigate();
 
@@ -76,12 +78,20 @@ function MyNavbar({ user, setUser }) {
         navigate('/');
     };
 
-    const openModal = () => {
-        setModalIsOpen(true);
+    const openSigninModal = () => {
+        setSigninModalIsOpen(true);
     };
 
-    const closeModal = () => {
-        setModalIsOpen(false);
+    const closeSigninModal = () => {
+        setSigninModalIsOpen(false);
+    };
+
+    const openRegisterModal = () => {
+        setRegisterModalIsOpen(true);
+    };
+
+    const closeRegisterModal = () => {
+        setRegisterModalIsOpen(false);
     };
 
     return (
@@ -118,14 +128,15 @@ function MyNavbar({ user, setUser }) {
                             </>
                         ) : (
                             <>
-                                <Nav.Link onClick={openModal} className="page-scroll">Login</Nav.Link>
-                                <Nav.Link as={Link} to="/register" className="page-scroll">Register</Nav.Link>
+                                <Nav.Link onClick={openSigninModal} className="page-scroll">Login</Nav.Link>
+                                <Nav.Link onClick={openRegisterModal} className="page-scroll">Register</Nav.Link>
                             </>
                         )}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-            <Signin setUser={setUser} modalIsOpen={modalIsOpen} closeModal={closeModal} />
+            <Signin setUser={setUser} modalIsOpen={signinModalIsOpen} closeModal={closeSigninModal} />
+            <Register setUser={setUser} modalIsOpen={registerModalIsOpen} closeModal={closeRegisterModal} />
         </>
     );
 }
