@@ -59,8 +59,8 @@ const ChangePasswordModal = ({ onClose }) => {
         />
         {error && <p className="error">{error}</p>}
         <div className="modal-buttons">
-          <button onClick={handleChangePassword}>Speichern</button>
           <button onClick={() => onClose()}>Abbrechen</button>
+          <button onClick={handleChangePassword}>Speichern</button>
         </div>
       </div>
     </div>

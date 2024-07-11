@@ -80,19 +80,29 @@ app.post('/api/benutzer', (req, res) => {
     });
 });
 
-app.post('/api/transactions', (req, res) => {
-    const { amount, date, email } = req.body;
-  
-    const query = 'INSERT INTO transactions (amount, date, email) VALUES (?, ?, ?)';
-    connection.execute(query, [amount, date, email], (err, results) => {
-      if (err) {
-        console.error('Fehler beim Einfügen der Daten:', err);
-        res.status(500).send({ message: 'Fehler beim Einfügen der Daten' });
-      } else {
-        res.status(200).send({ message: 'Transaktion erfolgreich gespeichert!', results });
-      }
+app.get('/api/benutzer', (req, res) => {
+    const email = req.query.email;
+
+    if (!email) {
+        return res.status(400).send('Email parameter is required');
+    }
+
+    const selectQuery = 'SELECT * FROM benutzer WHERE email = ?';
+    mysqlConnection.query(selectQuery, [email], (err, results) => {
+        if (err) {
+            console.error('Error selecting user:', err);
+            res.status(500).send('Error selecting user');
+            return;
+        }
+
+        if (results.length === 0) {
+            res.status(404).send('User not found');
+        } else {
+            res.json(results[0]);
+        }
     });
-  });
+});
+
 
 
 // app.post('/api/data1', (req, res) => {

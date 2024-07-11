@@ -18,22 +18,18 @@ const EditAddressModal = ({ onClose }) => {
 
   const fetchUserData = async (email) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/benutzer`);
-      const data = await response.json();
-      const userData = data.find(user => user.email === email);
-      if (userData) {
-        setEmail(userData.email);
-        setFirstName(userData.vorname);
-        setLastName(userData.nachname);
-        setNewAddress(userData.adresse);
-        setNewPhone(userData.telefonnummer);
-      }
+      const response = await fetch(`http://localhost:3001/api/benutzer?email=${email}`);
+      const userData = await response.json();
+      setFirstName(userData.vorname);
+      setLastName(userData.nachname);
+      setNewAddress(userData.adresse);
+      setNewPhone(userData.telefonnummer);
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
   };
 
-  const handleSave = async () => {
+  const Speichern = async () => {
     const userData = {
       email: email,
       vorname: firstName,
@@ -57,15 +53,9 @@ const EditAddressModal = ({ onClose }) => {
         alert('Fehler beim abspeichern, bitte wende dich an den Support.');
       }
     } finally {
-      onClose({
-        firstName,
-        lastName,
-        address: newAddress,
-        phone: newPhone,
-      });
+      onClose();
     }
   };
-  
   
 
   return (
@@ -82,8 +72,8 @@ const EditAddressModal = ({ onClose }) => {
         <input type="text" value={newAddress} onChange={(e) => setNewAddress(e.target.value)} />
         <label>Telefonnummer:</label>
         <input type="text" value={newPhone} onChange={(e) => setNewPhone(e.target.value)} />
-        <button onClick={handleSave}>Speichern</button>
-        <button onClick={() => onClose(null)}>Abbrechen</button>
+        <button onClick={Speichern}>Speichern</button>
+        <button onClick={() => onClose(null)}>Schliessen</button>
       </div>
     </div>
   );

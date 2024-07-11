@@ -83,8 +83,8 @@ const EditEmailModal = ({ email, onClose }) => {
             />
             {error && <p className="error">{error}</p>}
             <div className="modal-buttons">
+              <button onClick={() => onClose(null)}>Schliessen</button>
               <button onClick={handleSave}>Speichern</button>
-              <button onClick={() => onClose(null)}>Abbrechen</button>
             </div>
           </>
         ) : (
@@ -98,8 +98,8 @@ const EditEmailModal = ({ email, onClose }) => {
             />
             {error && <p className="error">{error}</p>}
             <div className="modal-buttons">
+              <button onClick={() => onClose(null)}>Schliessen</button>
               <button onClick={handleVerify}>Verifizieren</button>
-              <button onClick={() => onClose(null)}>Abbrechen</button>
             </div>
           </>
         )}
