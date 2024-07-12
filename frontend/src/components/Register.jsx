@@ -6,8 +6,8 @@ import Modal from 'react-modal';
 import "./Register.css";
 
 const poolData = {
-  UserPoolId: "eu-central-1_9qZhZhfNw",
-  ClientId: "1nqan7a5peja3fv8n9ofp5u7pm",
+  UserPoolId: "eu-central-1_u1EUpgENY",
+  ClientId: "34b76ra579e5682vh0mjju3pud",
 };
 
 const userPool = new CognitoUserPool(poolData);

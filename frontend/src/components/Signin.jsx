@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { CognitoUser, AuthenticationDetails, CognitoUserPool } from "amazon-cognito-identity-js";
 import { useNavigate } from "react-router-dom";
-import Modal from 'react-modal';
 import "./Signin.css";
 
 const poolData = {
-  UserPoolId: "eu-central-1_9qZhZhfNw",
-  ClientId: "1nqan7a5peja3fv8n9ofp5u7pm",
+  UserPoolId: "eu-central-1_u1EUpgENY",
+  ClientId: "34b76ra579e5682vh0mjju3pud",
 };
 
 const userPool = new CognitoUserPool(poolData);
 
-const Signin = ({ setUser, modalIsOpen, closeModal }) => {
+const Signin = ({ setUser }) => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [Name, setName] = useState("");
@@ -56,9 +55,8 @@ const Signin = ({ setUser, modalIsOpen, closeModal }) => {
           localStorage.setItem("userEmail", Email);
 
           alert("Login successful!");
-          alert(Email)
+         //alert(Email)
           navigate('/'); // Redirect to home page after successful login
-          closeModal(); // Close the modal
         });
       },
       onFailure: (err) => {
@@ -69,13 +67,7 @@ const Signin = ({ setUser, modalIsOpen, closeModal }) => {
   };
 
   return (
-    <Modal
-      isOpen={modalIsOpen}
-      onRequestClose={closeModal}
-      contentLabel="Sign In Modal"
-      className="signin-modal"
-      overlayClassName="signin-modal-overlay"
-    >
+    <>
       <h1 className="h1-design">Sign In to Your Account</h1>
       <div className="form-container">
         <div className="input-container">
@@ -112,7 +104,7 @@ const Signin = ({ setUser, modalIsOpen, closeModal }) => {
           Sign In
         </button>
       </div>
-    </Modal>
+    </>
   );
 };
 

@@ -1,5 +1,4 @@
-// App.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
 import MyNavbar from './components/Navbar';
@@ -14,19 +13,18 @@ import Pricing1 from './components/Pricing1';
 import Profil from './components/Profil';
 import Register from './components/Register';
 import Signin from './components/Signin';
-import Home from './components/Home'; // Import the Home component
+import Home from './components/Home';
 
 function App() {
     const [data, setData] = useState([]);
-    const [user, setUser] = useState(null); // State to manage user
-
+    const [user, setUser] = useState(null);
 
     return (
         <Router>
-            <MyNavbar user={user} setUser={setUser} /> {/* Pass user and setUser as props */}
+            <MyNavbar user={user} setUser={setUser} /> {/* Pass openModal as a prop */}
             <Routes>
-                <Route path="/" element={<Home user={user} setUser={setUser}  />} /> {/* Add a route for the home page */}
-                <Route path="/conference" element={<Conference />} />
+                <Route path="/" element={<Home user={user} setUser={setUser} />} /> {/* Add a route for the home page */}
+                <Route path="/conference" element={<Conference user={user} setUser={setUser} />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/benutzerkonto" element={<Benutzerkonto />} />
                 <Route path="/footer" element={<Footer />} />
