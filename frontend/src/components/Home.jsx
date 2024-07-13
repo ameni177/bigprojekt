@@ -3,6 +3,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './Home.css';
 import { Modal, Button } from 'react-bootstrap';
+import JitsiMeetComponent from './JitsiMeetComponent';
 
 const Home = ({ user}) => {
     const [data, setData] = useState([]);

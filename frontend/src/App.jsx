@@ -14,6 +14,7 @@ import Profil from './components/Profil';
 import Register from './components/Register';
 import Signin from './components/Signin';
 import Home from './components/Home';
+import JitsiMeetComponent from './components/JitsiMeetComponent';
 
 function App() {
     const [data, setData] = useState([]);
@@ -35,6 +36,7 @@ function App() {
                 <Route path="/profil" element={<Profil />} />
                 <Route path="/register" element={<Register setUser={setUser} />} />
                 <Route path="/signin" element={<Signin setUser={setUser} />} />
+                <Route path="/jitsimeetcomponent" element={<JitsiMeetComponent />} />
             </Routes>
             <Footer />
         </Router>
