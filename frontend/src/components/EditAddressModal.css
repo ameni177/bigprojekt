@@ -38,10 +38,15 @@
   border-radius: 4px;
 }
 
-.modal-content button {
+.button-container {
+  display: flex;
+  justify-content: space-between;
   margin-top: 20px;
+}
+
+.modal-content button {
   padding: 10px;
-  width: calc(50% - 10px);
+  margin: 5px;
   background: #007bff;
   color: white;
   border: none;
@@ -53,12 +58,26 @@
   background: #0056b3;
 }
 
-.modal-content button:last-child {
-  background: #dc3545;
+.savebutton {
+  background-color: rgb(51, 19, 78) !important;
+  color: #ffffff;
+  border-radius: 25px !important;
+  width: 150px;
 }
 
-.modal-content button:last-child:hover {
-  background: #c82333;
+.savebutton:hover {
+  background: #3a1460 !important;
+}
+
+.closebutton {
+  background-color: rgb(148, 28, 28) !important;
+  color: #ffffff;
+  border-radius: 25px !important;
+  width: 150px;
+}
+
+.closebutton:hover {
+  background: #a01d1d !important;
 }
 
 @keyframes fadeIn {
@@ -70,4 +89,8 @@
     opacity: 1;
     transform: scale(1);
   }
+}
+
+.inputtest {
+  border-radius: 25px !important;
 }

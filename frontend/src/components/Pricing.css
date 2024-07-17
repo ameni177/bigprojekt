@@ -1,50 +1,74 @@
-body {
-    font-size: 14px;
-    display: flex;
-    justify-content: center;
-  }
-  
-  @media (min-width: 768px) {
-    html {
-      font-size: 16px;
-    }
-  }
-  
-  .container {
-    max-width: 960px;
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .pricing-header {
-    max-width: 700px;
-  }
-  
-  .card-deck {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  
-  .card-deck .card {
-    min-width: 220px;
-    flex: 1;
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(255, 255, 255);
-  }
-  
-  .card-body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .btn-container {
-    display: flex;
-    justify-content: center;
-    margin-top: auto;
-  }
-  
+.obercont {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('./media/ii.jpg') no-repeat center center/cover;
+}
+
+.pricing-header {
+  max-width: 700px;
+}
+
+.card-deck {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  height: 500px;
+}
+
+.card-deck .card {
+  flex: 1;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255) !important;
+  width: 250px;
+  border-radius: 15px;
+}
+
+.card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.btn-primary {
+  background-color: rgb(107, 34, 107);
+  color: white;
+  border-color: #7B1FA2;
+}
+
+.btn-primary:hover {
+  background-color: rgb(145, 49, 129);
+  border-color: rgb(51, 19, 78);
+}
+
+.btn-outline-primary {
+  background-color: rgb(107, 34, 107);
+  color: white;
+  border-color: #7B1FA2;
+}
+
+.btn-outline-primary:hover {
+  background-color: rgb(145, 49, 129);
+  color: white;
+  border-color: #7B1FA2;
+}
+
+.card-header {
+  display: flex;
+  justify-content: center;  /* Horizontale Zentrierung */
+  align-items: center;      /* Vertikale Zentrierung */
+  text-align: center;       /* Optional: Zentriert den Text innerhalb des flexiblen Elements */
+}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { CognitoUserPool } from 'amazon-cognito-identity-js';
+import './ChangePassword.css'
 
 const poolData = {
   UserPoolId: "eu-central-1_u1EUpgENY",
@@ -46,12 +47,14 @@ const ChangePasswordModal = ({ onClose }) => {
       <div className="modal-content">
         <h2>Passwort ändern</h2>
         <input
+          className="inputtest"
           type="password"
           placeholder="Altes Passwort"
           value={oldPassword}
           onChange={(e) => setOldPassword(e.target.value)}
         />
         <input
+          className="inputtest"
           type="password"
           placeholder="Neues Passwort"
           value={newPassword}
@@ -59,8 +62,8 @@ const ChangePasswordModal = ({ onClose }) => {
         />
         {error && <p className="error">{error}</p>}
         <div className="modal-buttons">
-          <button onClick={() => onClose()}>Abbrechen</button>
-          <button onClick={handleChangePassword}>Speichern</button>
+          <button className="closebutton" onClick={() => onClose()}>Close</button>
+          <button className="savebutton" onClick={handleChangePassword}>Save</button>
         </div>
       </div>
     </div>

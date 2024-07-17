@@ -1,0 +1,69 @@
+.modal-backdrop.show {
+    opacity: 0;
+    z-index: 1;
+  }
+
+  .custom-modal .modal-content {
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  .modalconf {
+    z-index: 1050;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .form2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+    width: 450px;
+    margin: 0 auto;
+    border-radius: 25px;
+    border: 2px solid #4e0f8a;
+    padding: 10px;
+    background-color: white;
+  }
+  
+  .form-group1 {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    color: black;
+    font-weight: 600;
+    margin-right: -35px;
+  }
+
+  .savebutton1 {
+    background-color: rgb(51, 19, 78) !important;
+    color: #ffffff;
+    border-radius: 25px !important;
+    width: 150px;
+  }
+  
+  .savebutton1:hover {
+    background: #3a1460 !important;
+  }
+  
+  .closebutton1 {
+    background-color: rgb(148, 28, 28) !important;
+    color: #ffffff;
+    border-radius: 25px !important;
+    width: 150px;
+  }
+  
+  .closebutton1:hover {
+    background: #a01d1d !important;
+  }
+
+  .speziha {
+    display: flex;
+    text-align: center;
+    margin-left: 90%;
+    color: rgb(230, 228, 228);
+    width: 100%;
+  }

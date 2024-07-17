@@ -19,7 +19,8 @@ const Pricing1 = () => {
     "Premium Konferenzverwaltung",
   ];
   return (
-    <div className="card-deck mb-3 text-center">
+  <div className="obercont">
+    <div className="card-deck">
       <Box
         feature={featureBox1}
         price="0"
@@ -42,6 +43,7 @@ const Pricing1 = () => {
         btnId="premium"
       />
     </div>
+  </div>
   );
 };
 

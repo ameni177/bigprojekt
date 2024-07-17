@@ -50,12 +50,8 @@ const Box = (props) => {
         </ul>
         <div className="btn-container">
           {title === 'Free' ? (
-            <button
-              type="button"
-              className={`btn btn-lg btn-block ${btnClass}`}
-              onClick={() => navigate('/register')}
-            >
-              Sign-in for free
+            <button>
+              Active
             </button>
           ) : (
             <div id={`paypal-button-container-${btnId}`}></div>

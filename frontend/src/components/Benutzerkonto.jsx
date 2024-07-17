@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './Benutzerkonto.css';
-import Profil from './Profil.jsx';
 import EditEmailModal from './EditEmailModal.jsx';
 import EditAddressModal from './EditAddressModal.jsx';
 import ChangePasswordModal from './ChangePasswordModal.jsx';
@@ -19,9 +18,7 @@ const Benutzerkonto = () => {
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
   const [isEditingEmail, setIsEditingEmail] = useState(false);
-  const [isEditingName, setIsEditingName] = useState(false);
   const [isEditingAddress, setIsEditingAddress] = useState(false);
-  const [isEditingPhone, setIsEditingPhone] = useState(false);
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -98,26 +95,25 @@ const Benutzerkonto = () => {
   };
 
   if (!isLoggedIn) {
-    return <div>Bitte loggen Sie sich ein, um Ihre Kontoinformationen zu sehen.</div>;
+    return <div>Login for more informations.</div>;
   }
 
   return (
     <div className="benutzerkonto-container">
-      <Profil />
       <div className="form-container">
-        <h1>Benutzerkonto</h1>
+        <h1>Profile</h1>
         <div className="form-group">
           <label>E-Mail:</label>
           <p>{email}</p>
-          <button onClick={handleEditEmailClick}>Bearbeiten</button>
+          <button onClick={handleEditEmailClick}>Edit</button>
         </div>
         <div className="form-group">
-          <label>Adresse:</label>
-          <button onClick={handleEditAddressClick}>Bearbeiten</button>
+          <label>Adress:</label>
+          <button onClick={handleEditAddressClick}>Edit</button>
         </div>
         <div className="form-group">
-          <label>Passwort:</label>
-          <button onClick={handleChangePasswordClick}>Passwort ändern</button>
+          <label>Password:</label>
+          <button onClick={handleChangePasswordClick}>Change Password</button>
         </div>
       </div>
       {isEditingEmail && <EditEmailModal email={email} onClose={handleCloseEmailModal} />}

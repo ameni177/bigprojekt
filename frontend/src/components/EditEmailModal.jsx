@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CognitoUserPool, CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import AWS from 'aws-sdk';
+import './EditMailModal.css';
 
 const poolData = {
   UserPoolId: "eu-central-1_u1EUpgENY",
@@ -73,23 +74,24 @@ const EditEmailModal = ({ email, onClose }) => {
   return (
     <div className="modal">
       <div className="modal-content">
-        <h2>Email bearbeiten</h2>
+        <h2>Edit Email</h2>
         {!showVerification ? (
           <>
             <input
+              className="inputtest"
               type="email"
               value={newEmail}
               onChange={(e) => setNewEmail(e.target.value)}
             />
             {error && <p className="error">{error}</p>}
             <div className="modal-buttons">
-              <button onClick={() => onClose(null)}>Schliessen</button>
-              <button onClick={handleSave}>Speichern</button>
+              <button className="closebutton" onClick={() => onClose(null)}>Close</button>
+              <button className="savebutton" onClick={handleSave}>Save</button>
             </div>
           </>
         ) : (
           <>
-            <p>Ein Bestätigungscode wurde an {newEmail} gesendet.</p>
+            <p>A verification code was sent to {newEmail}.</p>
             <input
               type="text"
               placeholder="Bestätigungscode eingeben"
@@ -98,8 +100,8 @@ const EditEmailModal = ({ email, onClose }) => {
             />
             {error && <p className="error">{error}</p>}
             <div className="modal-buttons">
-              <button onClick={() => onClose(null)}>Schliessen</button>
-              <button onClick={handleVerify}>Verifizieren</button>
+              <button onClick={() => onClose(null)}>Close</button>
+              <button onClick={handleVerify}>Verify</button>
             </div>
           </>
         )}

@@ -61,22 +61,25 @@ const EditAddressModal = ({ onClose }) => {
   return (
     <div className="modal">
       <div className="modal-content">
-        <h2>Adresse bearbeiten</h2>
+        <h2>Edit personal data</h2>
         <label>Email:</label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} disabled />
-        <label>Vorname:</label>
-        <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-        <label>Nachname:</label>
-        <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-        <label>Adresse:</label>
-        <input type="text" value={newAddress} onChange={(e) => setNewAddress(e.target.value)} />
-        <label>Telefonnummer:</label>
-        <input type="text" value={newPhone} onChange={(e) => setNewPhone(e.target.value)} />
-        <button onClick={Speichern}>Speichern</button>
-        <button onClick={() => onClose(null)}>Schliessen</button>
+        <input className="inputtest" type="email" value={email} onChange={(e) => setEmail(e.target.value)} disabled />
+        <label>First Name:</label>
+        <input className="inputtest" type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+        <label>Last Name:</label>
+        <input className="inputtest" type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+        <label>Address:</label>
+        <input className="inputtest" type="text" value={newAddress} onChange={(e) => setNewAddress(e.target.value)} />
+        <label>Phone Number:</label>
+        <input className="inputtest" type="text" value={newPhone} onChange={(e) => setNewPhone(e.target.value)} />
+        <div className="button-container">
+          <button className="closebutton" onClick={() => onClose(null)}>Close</button>
+          <button className="savebutton" onClick={Speichern}>Save</button>
+        </div>
       </div>
     </div>
   );
+  
 };
 
 export default EditAddressModal;

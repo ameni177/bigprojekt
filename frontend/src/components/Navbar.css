@@ -1,7 +1,10 @@
 .navbar {
-  background-color: rgba(43, 16, 66, 0.8); /* Dark purple with transparency */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(43, 16, 66, 0.8);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
   padding: 10px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .navbar a {
@@ -63,4 +66,10 @@
 .navbar-nav .nav-item .dropdown-menu .dropdown-item:hover {
   background-color: #7B1FA2; /* Slightly darker purple on hover */
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+}
+
+.nav-link.active,
+.navbar-nav .nav-item .dropdown-menu .dropdown-item.active {
+  background-color: #7B1FA2; /* Behalten Sie die Hover-Farbe bei */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Behalten Sie den Hover-Effekt bei */
 }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Nachrichten.css';
-import Profil from './Profil.jsx';
 
 const Nachrichten = () => {
     const [emails, setEmails] = useState([]);
@@ -75,22 +74,19 @@ const Nachrichten = () => {
     };
 
     return (
-        <div className="benutzerkonto-container">
-            <Profil />
-            <div className="content-container">
+        <div className="nachrichten-container1">
+            <div className="content-container1">
                 <div className="header-content-wrapper">
-                    <div className="header-content">
-                        <h1>Nachrichten {isNewEmail && <span className="notification-symbol">•</span>}</h1>
-                        {/* Display notification symbol conditionally */}
+                    <div className="header-content1">
+                        <h1>Notifications {isNewEmail}</h1>
                     </div>
                 </div>
-                <div className="main-content">
                     {selectedEmail ? (
                         <div className="email-details">
                             <button onClick={handleBackClick} className="back-button">Zurück</button>
                             <h3>{selectedEmail.subject}</h3><br></br>
                             <p>{selectedEmail.body}</p><br></br>
-                            <small>Gesendet an: {selectedEmail.recipient}</small>
+                            <small>Send to: {selectedEmail.recipient}</small>
                         </div>
                     ) : (
                         <div className="email-list">
@@ -100,16 +96,15 @@ const Nachrichten = () => {
                                         <li key={email.id} className="email-item">
                                             <a href="#" onClick={() => handleEmailClick(email)} className="email-subject-link">{email.subject} {email.read ? '' : '(Ungelesen)'}</a>
                                             {/* Display unread indicator */}
-                                            <small className="email-recipient">Gesendet an: {email.recipient}</small>
+                                            <small className="email-recipient">Send to: {email.recipient}</small>
                                         </li>
                                     ))
                                 ) : (
-                                    <li>Keine E-Mails vorhanden</li>
+                                    <li>No Mails listed</li>
                                 )}
                             </ul>
                         </div>
                     )}
-                </div>
             </div>
         </div>
     );

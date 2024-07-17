@@ -10,7 +10,7 @@ const poolData = {
 
 const userPool = new CognitoUserPool(poolData);
 
-const Signin = ({ setUser }) => {
+const Signin = ({ setUser, onRequestClose }) => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [Name, setName] = useState("");
@@ -35,27 +35,24 @@ const Signin = ({ setUser }) => {
       onSuccess: (result) => {
         console.log("Authentication success:", result);
 
-        // Fetch user attributes after successful authentication
         cognitoUser.getUserAttributes((err, attributes) => {
           if (err) {
             console.error("Error fetching user attributes:", err);
             return;
           }
 
-          // Extract and set user name from attributes
           const userAttributes = {};
           for (let attribute of attributes) {
             userAttributes[attribute.getName()] = attribute.getValue();
           }
 
-          // Set user name in state or pass to parent component
+          // Set the user name from attributes (e.g., userAttributes['name'])
           setUser(Name);
 
-          // Save email in local storage
           localStorage.setItem("userEmail", Email);
 
           alert("Login successful!");
-         //alert(Email)
+          onRequestClose(); // Close the modal after successful login
           navigate('/'); // Redirect to home page after successful login
         });
       },
@@ -68,8 +65,8 @@ const Signin = ({ setUser }) => {
 
   return (
     <>
-      <h1 className="h1-design">Sign In to Your Account</h1>
-      <div className="form-container">
+      <div className="signin-modal">
+      <h1 className="h1-design">Sign in to your account</h1>
         <div className="input-container">
           <label htmlFor="name">Name:</label>
           <input

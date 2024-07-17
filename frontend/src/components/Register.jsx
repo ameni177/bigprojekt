@@ -1,9 +1,8 @@
-// Register.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { CognitoUserPool, CognitoUserAttribute, CognitoUser } from "amazon-cognito-identity-js";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import moment from 'moment'; // Import moment library
+import "./Register.css"; // Import your CSS file
 
 const poolData = {
     UserPoolId: "eu-central-1_u1EUpgENY", // Replace with your User Pool ID
@@ -12,7 +11,7 @@ const poolData = {
 
 const userPool = new CognitoUserPool(poolData);
 
-function Register({ setUser }) { // Accept setUser as a prop
+function Register({ setUser, onRequestClose }) { // Accept setUser and onRequestClose as props
     const navigate = useNavigate(); // Initialize useNavigate
     const [Name, setName] = useState("");
     const [Password, setPassword] = useState("");
@@ -53,10 +52,7 @@ function Register({ setUser }) { // Accept setUser as a prop
                 }
                 console.log("Sign up success:", result);
                 alert("Registration successful! Please check your email for verification code.");
-                alert("Please enter your confirmation code to proceed")
-                
-                // Set the user and navigate to home page after successful registration
-              
+                alert("Please enter your confirmation code to proceed");
             });
         } catch (error) {
             console.error("Error signing up:", error);
@@ -86,13 +82,8 @@ function Register({ setUser }) { // Accept setUser as a prop
             console.log("Confirmation success:", result);
             alert("Registration confirmed successfully!");
             setUser(Name);
+            onRequestClose(); // Close the modal
             navigate('/');
-            //setName("");
-            //setPassword("");
-            //setConfirmPassword("");
-            //setEmail("");
-            //setConfirmationCode("");
-           
         });
     };
 
@@ -115,9 +106,9 @@ function Register({ setUser }) { // Accept setUser as a prop
     };
 
     return (
-        <>
-            <h1 className="h1-design">Register for Your Account</h1>
+        <div className="register-modal">
             <div className="form-container">
+            <h1 className="h1-design">Register for your account</h1>
                 <div className="input-container">
                     <label htmlFor="name">Name:</label>
                     <input
@@ -138,8 +129,17 @@ function Register({ setUser }) { // Accept setUser as a prop
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
-                <div className="password-container">
-                    <label htmlFor="password">Password:</label>
+                <div className="input-container">
+                    <label htmlFor="password">
+                        Password:
+                        <button
+                            type="button"
+                            className="toggle-password"
+                            onClick={togglePasswordVisibility}
+                        >
+                            {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                    </label>
                     <input
                         type={passwordVisible ? "text" : "password"}
                         id="password"
@@ -147,16 +147,18 @@ function Register({ setUser }) { // Accept setUser as a prop
                         value={Password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <button
-                        type="button"
-                        className="toggle-password"
-                        onClick={togglePasswordVisibility}
-                    >
-                        {passwordVisible ? <FaEyeSlash /> : <FaEye />}
-                    </button>
                 </div>
-                <div className="password-container">
-                    <label htmlFor="confirmPassword">Confirm Password:</label>
+                <div className="input-container">
+                    <label htmlFor="confirmPassword">
+                        Confirm Password:
+                        <button
+                            type="button"
+                            className="toggle-password"
+                            onClick={toggleConfirmPasswordVisibility}
+                        >
+                            {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                    </label>
                     <input
                         type={confirmPasswordVisible ? "text" : "password"}
                         id="confirmPassword"
@@ -164,13 +166,6 @@ function Register({ setUser }) { // Accept setUser as a prop
                         value={ConfirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
-                    <button
-                        type="button"
-                        className="toggle-password"
-                        onClick={toggleConfirmPasswordVisibility}
-                    >
-                        {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
-                    </button>
                 </div>
                 <button type="button" onClick={handleRegister}>
                     Submit
@@ -185,11 +180,8 @@ function Register({ setUser }) { // Accept setUser as a prop
                     placeholder="Enter confirmation code"
                 />
                 <button onClick={handleConfirmation}>Confirm</button>
-                
-              
-
             </div>
-        </>
+        </div>
     );
 }
 

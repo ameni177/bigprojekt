@@ -6,7 +6,7 @@ const Box = (props) => {
   const navigate = useNavigate();
 
   return (
-    <div className="card mb-4 shadow-sm">
+    <div className="card mb-4 shadow-sm box-size">
       <div className="card-header">
         <h4 className="my-0 font-weight-normal">{title}</h4>
       </div>
@@ -43,4 +43,5 @@ const Box = (props) => {
     </div>
   );
 };
+
 export default Box;
