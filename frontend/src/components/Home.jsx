@@ -140,13 +140,16 @@ const Home = ({ user }) => {
             </div>
           </div>
         </aside>
-        <header className="home-header">
-          <h1 className="textvariant">Welcome, {user}!</h1>
-        </header>
+
         {user && (
+          <>
+          <header className="home-header">
+          <h1 className="textvariant">Welcome, {user}!</h1>
+          </header>
           <div className="zentierer">
             <h2 className="overevent">Upcoming Events:</h2>
           </div>
+          </>
         )}
         <div className="conferences-container">
           {data.map((item) => (
