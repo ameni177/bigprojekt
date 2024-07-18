@@ -91,9 +91,12 @@ function MyNavbar({ user, setUser }) {
     return (
         <>
             <Navbar fixed="top" className="navbar-transparent" expand="lg">
-                <Navbar.Brand as={Link} to="/" className="navbar-brand-custom">
-                    Watch Us {/* Modify this text to change the brand name */}
-                </Navbar.Brand>
+            <Navbar.Brand as={Link} to="/">
+                <img
+                    src="superlogo-fertig2.png"
+                    style={{ height: '40px'}}
+                />
+            </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">

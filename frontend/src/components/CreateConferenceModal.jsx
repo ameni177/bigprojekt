@@ -58,7 +58,7 @@ const CreateConferenceModal = ({ show, onClose, onSave }) => {
             <input type="text" name="organisator" value={newConference.organisator} onChange={handleInputChange} required />
           </div>
           <div className="form-group1">
-            Name:
+            Conference-Name:
             <input type="text" name="name" value={newConference.name} onChange={handleInputChange} required />
           </div>
           <div className="form-group1">
@@ -95,7 +95,7 @@ const CreateConferenceModal = ({ show, onClose, onSave }) => {
             <input type="text" name="participant_emails" value={newConference.participant_emails.join(', ')} onChange={handleInputChange} required />
           </div>
           <button className="closebutton1" onClick={onClose}>Close</button>
-          <button className="savebutton1" type="submit">Create</button>
+          <button className="savebutton1" type="submit" onClick={() => alert('Conference successfully created')}>Create</button>
         </form>
       </div>
     </Modal>

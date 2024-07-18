@@ -140,7 +140,18 @@ const Home = ({ user }) => {
             </div>
           </div>
         </aside>
-
+        {!user && (
+          <div className="homediv">
+            <div className="hello1">
+            Welcome to our Conference Management Website.<br />
+            Plan and manage your conferences easily and efficiently with our user-friendly platform.<br /><br />
+            Create new conferences, browse existing ones, and enjoy seamless collaboration with all your participants.<br />
+            </div>
+            <div className="video-container">
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/FnY7pfT5euI?si=GTqHvezbt-Kg6lJm" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+            </div>
+          </div>
+      )}
         {user && (
           <>
           <header className="home-header">
