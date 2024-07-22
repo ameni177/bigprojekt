@@ -10,8 +10,8 @@ Um das Projekt lokal zu installieren und zu starten, folge diesen Schritten:
 
 1. Klone das Repository:
    ```bash
-   git clone https://github.com/Benutzername/Projektname.git
-   cd Projektname
+   git clone https://github.com/ameni177/bigprojekt
+   cd bigprojekt
 
 2. Installiere die Abhängigkeiten für das Frontend:
    ```bash
