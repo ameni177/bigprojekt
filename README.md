@@ -2,9 +2,9 @@
 
 ## Kurze Einführung ins Projekt
 Unser Projekt ist ein umfassendes Konferenzmanagementsystem, das es Benutzern ermöglicht, Konferenzen zu erstellen, daran teilzunehmen und diese zu verwalten.
-## Deployment Anleitung
+## Deployment Anleitung ((Zielgruppe Entwickler))
 
-### Installation und Start(Zielgruppe Entwickler)
+### Installation und Start
 
 Um das Projekt lokal zu installieren und zu starten, folge diesen Schritten:
 
